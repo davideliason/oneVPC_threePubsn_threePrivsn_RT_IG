@@ -21,6 +21,12 @@ my-terraform-project
 │   │   └── outputs.tf     # Output values for the subnet module
 └── README.md              # Documentation for the project
 ```
+![image](https://github.com/user-attachments/assets/12f0c961-5718-4672-b9e6-d4457691f82c)
+
+
+
+
+
 
 ## Setup Instructions
 
