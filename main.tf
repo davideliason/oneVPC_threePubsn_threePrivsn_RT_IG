@@ -41,3 +41,35 @@ resource "aws_subnet" "prd-pub-subnet-3" {
   }
 }
 
+resource "aws_subnet" "prd-pri-subnet-1" {
+  vpc_id            = aws_vpc.prd-vpc.id
+  cidr_block        = "10.0.10.0/24"
+  availability_zone = "us-west-2a"
+
+  tags = {
+    Name = "prd-pri-subnet-1"
+  }
+}
+
+resource "aws_subnet" "prd-pri-subnet-2" {
+  vpc_id            = aws_vpc.prd-vpc.id
+  cidr_block        = "10.0.11.0/24"
+  availability_zone = "us-west-2b"
+
+  tags = {
+    Name = "prd-pri-subnet-2"
+  }
+}
+
+resource "aws_subnet" "prd-pri-subnet-3" {
+  vpc_id            = aws_vpc.prd-vpc.id
+  cidr_block        = "10.0.12.0/24"
+  availability_zone = "us-west-2c"
+
+  tags = {
+    Name = "prd-pri-subnet-3"
+  }
+}
+
+
+
