@@ -11,7 +11,27 @@ resource "aws_vpc" "prd-vpc" {
   cidr_block = "10.0.0.0/16"
 }
 
-resource "aws_subnet" "prd-pub-subnet-1 " {
+# Creating a new VPC for development workloads
+resource "aws_vpc" "dev-vpc" {
+  cidr_block = "10.10.0.0/16"
+}
+
+# Security group for our development web server
+resource "aws_security_group" "dev-web-sg" {
+  vpc_id = aws_vpc.dev-vpc.id
+
+  ingress {
+    description = "HTTP"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/16"]
+  }
+}
+
+
+
+resource "aws_subnet" "prd-pub-subnet-1" {
   vpc_id            = aws_vpc.prd-vpc.id
   cidr_block        = "10.0.0.0/24"
   availability_zone = "us-west-2a"
