@@ -104,4 +104,23 @@ resource "aws_route_table_association" "prd-pub-rt-assoc-3" {
   route_table_id = aws_route_table.prd-pub-rt.id
 }
 
+resource "aws_route_table" "prd-pri-rt" {
+  vpc_id = aws_vpc.prd-vpc.id
+}
+
+resource "aws_route_table_association" "prd-pri-rt-assoc-1" {
+  subnet_id      = aws_subnet.prd-pri-subnet-1.id
+  route_table_id = aws_route_table.prd-pri-rt.id
+}
+
+resource "aws_route_table_association" "prd-pri-rt-assoc-2" {
+  subnet_id      = aws_subnet.prd-pri-subnet-2.id
+  route_table_id = aws_route_table.prd-pri-rt.id
+}
+
+resource "aws_route_table_association" "prd-pri-rt-assoc-3" {
+  subnet_id      = aws_subnet.prd-pri-subnet-3.id
+  route_table_id = aws_route_table.prd-pri-rt.id
+}
+
 
