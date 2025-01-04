@@ -79,3 +79,29 @@ resource "aws_internet_gateway" "prd-igw" {
   }
 }
 
+resource "aws_route_table" "prd-pub-rt" {
+  vpc_id = aws_vpc.prd-vpc.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.prd-igw.id
+  }
+}
+
+
+resource "aws_route_table_association" "prd-pub-rt-assoc-1" {
+  subnet_id      = aws_subnet.prd-pub-subnet-1.id
+  route_table_id = aws_route_table.prd-pub-rt.id
+}
+
+resource "aws_route_table_association" "prd-pub-rt-assoc-2" {
+  subnet_id      = aws_subnet.prd-pub-subnet-2.id
+  route_table_id = aws_route_table.prd-pub-rt.id
+}
+
+resource "aws_route_table_association" "prd-pub-rt-assoc-3" {
+  subnet_id      = aws_subnet.prd-pub-subnet-3.id
+  route_table_id = aws_route_table.prd-pub-rt.id
+}
+
+
