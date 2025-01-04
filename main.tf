@@ -71,5 +71,11 @@ resource "aws_subnet" "prd-pri-subnet-3" {
   }
 }
 
+resource "aws_internet_gateway" "prd-igw" {
+  vpc_id = aws_vpc.prd-vpc.id
 
+  tags = {
+    Name = "prd-igw"
+  }
+}
 
