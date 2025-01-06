@@ -29,6 +29,31 @@ resource "aws_security_group" "dev-web-sg" {
   }
 }
 
+# Security group for our production web server
+resource "aws_security_group" "prd-web-sg" {
+  vpc_id = aws_vpc.prd-vpc.id
+
+  ingress {
+    description = "HTTP"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/16"] # allow traffic from the internet
+  }
+}
+
+
+# create t2.micro ec2 instance for development web server in us-west-2a
+resource "aws_instance" "prd-web-server" {
+  ami                    = "ami-07d9cf938edb0739b"
+  instance_type          = "t2.micro"
+  subnet_id              = aws_subnet.prd-pub-subnet-1.id
+  vpc_security_group_ids = [aws_security_group.prd-web-sg.id]
+
+  tags = {
+    Name = "prd-web-server-us-west-2a-public"
+  }
+}
 
 
 resource "aws_subnet" "prd-pub-subnet-1" {
@@ -40,6 +65,8 @@ resource "aws_subnet" "prd-pub-subnet-1" {
     Name = "prd-pub-subnet-1"
   }
 }
+
+
 
 resource "aws_subnet" "prd-pub-subnet-2" {
   vpc_id            = aws_vpc.prd-vpc.id
